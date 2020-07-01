@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -19,7 +20,7 @@ namespace API.Controllers
     }
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MatchesController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -44,6 +45,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("{matchId}")]
         public IActionResult Get(Guid matchId)
         {
             var matches = _matchBusinessLogic.GetMatch(matchId);
@@ -51,6 +53,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("{playerScreen}")]
         public IActionResult Get(string playerScreen)
         {
             var matches = _matchBusinessLogic.GetMatchesForPlayer(playerScreen);
@@ -74,7 +77,9 @@ namespace API.Controllers
     }
 
     public class MatchDto {
-
+        public Guid? MatchId { get; set; }
+        public DateTime? CreatedAtUtc { get; set; }
+        public List<Player> Players { get; set; } = new List<Player>();
     }
 
 
@@ -87,6 +92,14 @@ namespace API.Controllers
     }
     public class MatchBusinessLogic : IMatchBusinessLogic
     {
+        private readonly IMatchRepo _matchRepo;
+        private readonly IMapper _mapper;
+
+        public MatchBusinessLogic(IMatchRepo matchRepo, IMapper mapper)
+        {
+            _matchRepo = matchRepo;
+            _mapper = mapper;
+        }
         public Match CreateMatch(MatchDto x)
         {
             throw new NotImplementedException();
@@ -99,7 +112,8 @@ namespace API.Controllers
 
         public IEnumerable<Match> GetMatches()
         {
-            throw new NotImplementedException();
+            var entites = _matchRepo.GetMatches();
+            return entites.Select(x => _mapper.Map<Match>(x));
         }
 
         public IEnumerable<Match> GetMatchesForPlayer(string playerScreen)
@@ -122,7 +136,29 @@ namespace API.Controllers
 
         public IEnumerable<Match> GetMatches()
         {
-            throw new NotImplementedException();
+            return new[]
+            {
+                new Match
+                {
+                    MatchId = Guid.NewGuid(),
+                    CreatedAtUtc= DateTime.UtcNow,
+                    Players = new List<Player>
+                    {
+                        new Player {ScreenName = "broStepUrGameup"},
+                        new Player {ScreenName = "Shadou"},
+                        new Player {ScreenName = "Saud89"},
+                        new Player {ScreenName = "SherlockHomie"},
+                    }
+                }
+            };
+        }
+    }
+
+    public class AppProfile : Profile
+    {
+        public AppProfile()
+        {
+            CreateMap<Match, MatchDto>();
         }
     }
 }
