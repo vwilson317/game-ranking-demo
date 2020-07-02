@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Table } from 'reactstrap';
 import moment from 'moment';
 
-interface IMatch {
-  matchId: string,
+export interface IMatch {
+  matchId?: string,
   createdAtUtc: string,
   standings: IPlayer[]
 }

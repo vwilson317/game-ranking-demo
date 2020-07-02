@@ -8,11 +8,11 @@ module.exports = function(app) {
     })
   );
 
-  // app.use(
-  //   '/matchhub',
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:5000',
-  //     changeOrigin: true,
-  //   })
-  // );
+  app.use(
+    '/matchhub',
+    createProxyMiddleware({
+      target: 'http://localhost:5000',
+      changeOrigin: true,
+    })
+  );
 };

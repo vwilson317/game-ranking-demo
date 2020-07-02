@@ -35,8 +35,8 @@ namespace API
             services.AddSingleton<IMatchRepo, MatchRepo>();
 
             services.AddAutoMapper(typeof(Startup));
-
-            //services.AddSignalR();
+            services.AddCors();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +56,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapHub<MatchHub>("/matchhub");
+                endpoints.MapHub<MatchHub>("/matchhub");
             });
 
             app.UseStatusCodePages();
