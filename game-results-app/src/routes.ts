@@ -17,6 +17,7 @@
 */
 import Dashboard from "./views/Dashboard";
 import UserProfile from "./views/UserProfile";
+import { UserMatches } from './views/UserMatches';
 
 var routes = [
   {
@@ -26,9 +27,15 @@ var routes = [
     component: Dashboard,
   },
   {
-    path: "/user-profile",
-    name: "User Profile",
+    path: "/user-matches",
+    name: "User Matches",
     icon: "tim-icons icon-single-02",
+    component: UserMatches,
+  },
+  {
+    path: "/submit-match-results",
+    name: "Submit Match Results",
+    icon: "tim-icons icon-pencil",
     component: UserProfile,
   }
 ];

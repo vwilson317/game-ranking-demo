@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 import "./assets/scss/black-dashboard-react.scss";
 import "./assets/demo/demo.css";
@@ -23,12 +25,14 @@ import {
 // const hist = createBrowserHistory();
 
 ReactDOM.render(
+  <Provider store={store}>
     <Router>
     <Switch>
       <Route path="/" render={(props: any) => <App {...props} />} />
       {/* <Redirect from="/" to="/dashboard" /> */}
     </Switch>
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

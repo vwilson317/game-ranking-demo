@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                  <CardTitle tag="h4">Match Results</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <MatchTable />

@@ -16,7 +16,7 @@ namespace API.Controllers
     {
         public Guid MatchId { get; set; }
         public DateTime CreatedAtUtc { get; set; }
-        public List<Player> Players { get; set; } = new List<Player>();
+        public List<Player> Standings { get; set; } = new List<Player>();
     }
 
     [ApiController]
@@ -136,21 +136,20 @@ namespace API.Controllers
 
         public IEnumerable<Match> GetMatches()
         {
-            return new[]
-            {
+            return Enumerable.Repeat(
                 new Match
                 {
                     MatchId = Guid.NewGuid(),
-                    CreatedAtUtc= DateTime.UtcNow,
-                    Players = new List<Player>
+                    CreatedAtUtc = DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(5)),
+                    Standings = new List<Player>
                     {
                         new Player {ScreenName = "broStepUrGameup"},
                         new Player {ScreenName = "Shadou"},
                         new Player {ScreenName = "Saud89"},
                         new Player {ScreenName = "SherlockHomie"},
                     }
-                }
-            };
+                },
+                13);
         }
     }
 

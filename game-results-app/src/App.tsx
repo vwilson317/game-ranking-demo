@@ -5,7 +5,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 // core components
 import Sidebar from "./components/Sidebar/Sidebar.js";
-import routes from "./routes.js";
+import routes from "./routes";
 import logo from "./assets/img/react-logo.png";
 import TopNavbar from "./components/TopNavbar";
 
@@ -75,18 +75,17 @@ class App extends React.Component<AppProps, AppState> {
         );
     });
   };
-  getBrandText = (path: any) => {
-
-    // for (let i = 0; i < routes.length; i++) {
-    //   if (
-    //     this.props.location.pathname.indexOf(
-    //       routes[i].layout + routes[i].path
-    //     ) !== -1
-    //   ) {
-    //     return routes[i].name;
-    //   }
-    // }
-    return "Brand";
+  getPageTitle = (path: any) => {
+    for (let i = 0; i < routes.length; i++) {
+      if (
+        this.props.location.pathname.indexOf(
+          routes[i].path
+        ) !== -1
+      ) {
+        return routes[i].name;
+      }
+    }
+    return "";
   };
   render() {
     return (
@@ -109,7 +108,7 @@ class App extends React.Component<AppProps, AppState> {
           >
             <TopNavbar
               {...this.props}
-              brandText={this.getBrandText(this.props.location.pathname)}
+              brandText={this.getPageTitle(this.props.location.pathname)}
             />
             <Switch>
               {this.getRoutes(routes)}

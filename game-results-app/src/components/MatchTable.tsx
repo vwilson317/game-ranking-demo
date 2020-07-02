@@ -9,7 +9,7 @@ interface IMatch {
   standings: IPlayer[]
 }
 
-interface IPlayer{
+export interface IPlayer{
   screenName: string
 }
 
