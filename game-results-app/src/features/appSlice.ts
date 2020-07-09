@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunk, RootState } from '../app/store';
+import { RootState } from '../app/store';
 import { IPlayer, IMatch } from '../components/MatchTable';
 
 interface AppState {

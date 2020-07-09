@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import React from 'react'
 import { Table } from 'reactstrap';
 import moment from 'moment';
 
@@ -36,7 +35,6 @@ const MatchTable = (props: any) => {
     if(screenName){
       //todo: move to server side
       matches = matches.filter(x => x.standings.map(x=> x.screenName).includes(screenName));
-      debugger
     }
     if (matches) {
       return (matches.map(x => {
@@ -56,6 +54,7 @@ const MatchTable = (props: any) => {
   }
 
   const getScreenName = (match: IMatch): any => {
+    // eslint-disable-next-line
     return (match.standings.map((x, index) => { 
       if(index < 3) {
         return <td onClick={() => rowClick(x.screenName)} className="text-center" style={rowStyle}>{x.screenName}</td>

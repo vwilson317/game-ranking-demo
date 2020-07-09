@@ -61,7 +61,7 @@ class Sidebar extends React.Component {
 
   getRoutePath = (props) => {
     if(props.name === "User Matches"){
-      return props.path + `/vwilson317`;
+      return props.path + `/broStepUrGameup`; //todo: replace with logged in user
     }
 
     return props.path;

@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 // import PerfectScrollbar from "perfect-scrollbar";
@@ -10,7 +10,7 @@ import routes from "./routes";
 import logo from "./assets/img/react-logo.png";
 import TopNavbar from "./components/TopNavbar";
 
-import { getMatches, setMatches, selectScreenName, setSelectedPlayer } from './features/appSlice';
+import { setMatches, selectScreenName, setSelectedPlayer } from './features/appSlice';
 import axios from 'axios';
 import { IPlayer } from './components/MatchTable';
 import {
@@ -66,13 +66,8 @@ class App extends React.Component<AppProps> {
     }
   }
 
-  getData = (userScreenName?: string | undefined) => {
-    const screenName = this.props.selectScreenName();
-    const userMatches = this.props.location.pathname.includes("user-matches");
+  getData = () => {
     let strPath = 'api/matches';
-    if(screenName && userMatches){
-      strPath += `/${screenName}`;
-    }
 
     axios.get(strPath)
     .then(res => {

@@ -1,6 +1,5 @@
 import React from "react";
 import MatchTable from '../components/MatchTable';
-import { useSelector, useDispatch } from 'react-redux';
 
 // // reactstrap components
 import {

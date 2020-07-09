@@ -24,7 +24,6 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
   FormGroup,
   Form,
   Input,
@@ -33,7 +32,6 @@ import {
 } from "reactstrap";
 import Axios from "axios";
 import { IMatch, IPlayer } from '../components/MatchTable';
-import moment from "moment";
 
 function UserProfile() {
   const [playerStandings, setPlayerStandings] = useState('')

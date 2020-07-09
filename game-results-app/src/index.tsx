@@ -13,11 +13,7 @@ import "./assets/css/nucleo-icons.css";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-  Redirect
+  Route
 } from "react-router-dom";
 
 // import { createBrowserHistory } from "history";
