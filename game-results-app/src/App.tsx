@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, useDispatch } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, Redirect } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 // import PerfectScrollbar from "perfect-scrollbar";
@@ -10,8 +10,9 @@ import routes from "./routes";
 import logo from "./assets/img/react-logo.png";
 import TopNavbar from "./components/TopNavbar";
 
-import { getMatches, setMatches } from './features/counterSlice';
+import { getMatches, setMatches, selectScreenName, setSelectedPlayer } from './features/counterSlice';
 import axios from 'axios';
+import { IPlayer } from './components/MatchTable';
 import {
   JsonHubProtocol,
   HubConnectionState,
@@ -22,12 +23,13 @@ import {
 // var ps;
 type AppProps = {
   location: { pathname: string },
-  setMatches: (data: any) => {}
+  setMatches: (data: any) => {},
+  selectScreenName: () => string | undefined,
+  setSelectedPlayer: (player: IPlayer) => {}
 }
 
 type AppState = {
   backgroundColor: string,
-  //sidebarOpened: 
 }
 
 const connectionHub = "matchhub"
@@ -42,26 +44,12 @@ class App extends React.Component<AppProps> {
     super(props);
     this.state = {
       backgroundColor: "blue",
-      // sidebarOpened:
-      //   document.documentElement.className.indexOf("nav-open") !== -1
     };
 
-    this.getData();
   }
 
   // const App = (props: AppProps) => {
   componentDidMount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      document.documentElement.className += " perfect-scrollbar-on";
-      document.documentElement.classList.remove("perfect-scrollbar-off");
-      // ps = new PerfectScrollbar(this.refs.mainPanel, { suppressScrollX: true });
-      let tables = document.querySelectorAll(".table-responsive");
-      // for (let i = 0; i < tables.length; i++) {
-      //   ps = new PerfectScrollbar(tables[i]);
-      // }
-
-    }
-
       const connection = new HubConnectionBuilder()
       .withUrl(connectionHub, options)
       .withAutomaticReconnect()
@@ -69,14 +57,24 @@ class App extends React.Component<AppProps> {
       .configureLogging(LogLevel.Information)
       .build();
 
-    // const dispatch = useDispatch();
-
-
     this.startSignalRConnection(connection);
+
+    this.getData();
+
+    if(this.props.location.pathname.includes("user-matches")){
+      this.props.setSelectedPlayer({screenName: this.props.location.pathname.split("/")[2]});
+    }
   }
 
-  getData = () => {
-    axios.get(`api/matches`)
+  getData = (userScreenName?: string | undefined) => {
+    const screenName = this.props.selectScreenName();
+    const userMatches = this.props.location.pathname.includes("user-matches");
+    let strPath = 'api/matches';
+    if(screenName && userMatches){
+      strPath += `/${screenName}`;
+    }
+
+    axios.get(strPath)
     .then(res => {
       const matches = res.data;
       this.props.setMatches(matches);
@@ -94,7 +92,7 @@ class App extends React.Component<AppProps> {
     } catch (err) {
       console.assert(connection.state === HubConnectionState.Disconnected);
       console.error('SignalR Connection Error: ', err);
-      //setTimeout(() => this.startSignalRConnection(connection), 5000);
+      setTimeout(() => this.startSignalRConnection(connection), 5000);
     }
   };
 
@@ -164,6 +162,8 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     // dispatching plain actions
     setMatches: (data: any) => dispatch(setMatches(data)),
+    selectScreenName: ():string => dispatch(selectScreenName),
+    setSelectedPlayer: (player: IPlayer) => dispatch(setSelectedPlayer)
   }
 }
 

@@ -15,4 +15,4 @@ namespace API.Hubs
             await Clients.All.SendAsync(MESSAGE);
         }
     }
-}
+}   

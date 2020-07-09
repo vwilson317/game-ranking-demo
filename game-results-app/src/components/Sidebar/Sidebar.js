@@ -26,6 +26,8 @@ import { PropTypes } from "prop-types";
 
 // reactstrap components
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
+import { useSelector } from "react-redux";
+import { selectScreenName } from "../../features/counterSlice";
 
 // var ps;
 
@@ -55,6 +57,16 @@ class Sidebar extends React.Component {
   linkOnClick = () => {
     document.documentElement.classList.remove("nav-open");
   };
+
+
+  getRoutePath = (props) => {
+    if(props.name === "User Matches"){
+      return props.path + `/vwilson317`;
+    }
+
+    return props.path;
+  }
+
   render() {
     const { bgColor, routes, logo } = this.props;
     let logoImg = null;
@@ -127,7 +139,7 @@ class Sidebar extends React.Component {
                   key={key}
                 >
                   <NavLink
-                    to={prop.path}
+                    to={this.getRoutePath(prop)}
                     className="nav-link"
                     activeClassName="active"
                     onClick={this.props.toggleSidebar}

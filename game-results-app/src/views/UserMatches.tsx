@@ -17,14 +17,14 @@ import {
   Col,
   CardTitle
 } from "reactstrap";
-import { selectScreenName, selectCount } from '../features/counterSlice';
+import { selectScreenName } from '../features/counterSlice';
 
 type UserMatchesProps = {
     screenName: string
 }
 
-export function UserMatches() {
-    const screenName = useSelector(selectScreenName);
+export function UserMatches(props: any) {
+    const screenName = props.location.pathname.split("/")[2];
     return (<>
     <div className="content">
           <Row>
