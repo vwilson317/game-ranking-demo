@@ -19,7 +19,7 @@ export function UserMatches(props: any) {
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">{screenName} Match Results</CardTitle>
+                  <CardTitle tag="h4">Match Results for: <b>{screenName}</b></CardTitle>
                 </CardHeader>
                 <CardBody>
                   <MatchTable screenName={screenName}/>

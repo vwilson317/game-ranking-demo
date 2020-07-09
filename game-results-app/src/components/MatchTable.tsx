@@ -39,7 +39,7 @@ const MatchTable = (props: any) => {
     if (matches) {
       return (matches.map(x => {
         return (
-          <tr >
+          <tr key={x.matchId}>
             <td>{getFormattedDate(x.createdAtUtc)}</td>
             {getScreenName(x)}
           </tr>
@@ -57,7 +57,9 @@ const MatchTable = (props: any) => {
     // eslint-disable-next-line
     return (match.standings.map((x, index) => { 
       if(index < 3) {
-        return <td onClick={() => rowClick(x.screenName)} className="text-center" style={rowStyle}>{x.screenName}</td>
+        return <td key={x.screenName} onClick={() => rowClick(x.screenName)} className="text-center" style={rowStyle}>
+          {x.screenName}
+          </td>
       }
     }))
   }
