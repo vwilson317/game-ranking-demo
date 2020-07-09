@@ -4,7 +4,7 @@ import { Table } from 'reactstrap';
 import moment from 'moment';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedPlayer, getMatches } from '../features/counterSlice';
+import { setSelectedPlayer, getMatches } from '../features/appSlice';
 import { useHistory } from 'react-router';
 
 export interface IMatch {
@@ -36,6 +36,7 @@ const MatchTable = (props: any) => {
     if(screenName){
       //todo: move to server side
       matches = matches.filter(x => x.standings.map(x=> x.screenName).includes(screenName));
+      debugger
     }
     if (matches) {
       return (matches.map(x => {

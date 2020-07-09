@@ -10,7 +10,7 @@ import routes from "./routes";
 import logo from "./assets/img/react-logo.png";
 import TopNavbar from "./components/TopNavbar";
 
-import { getMatches, setMatches, selectScreenName, setSelectedPlayer } from './features/counterSlice';
+import { getMatches, setMatches, selectScreenName, setSelectedPlayer } from './features/appSlice';
 import axios from 'axios';
 import { IPlayer } from './components/MatchTable';
 import {

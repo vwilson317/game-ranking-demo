@@ -27,7 +27,7 @@ import { PropTypes } from "prop-types";
 // reactstrap components
 import { Nav, NavLink as ReactstrapNavLink } from "reactstrap";
 import { useSelector } from "react-redux";
-import { selectScreenName } from "../../features/counterSlice";
+import { selectScreenName } from "../../features/appSlice";
 
 // var ps;
 

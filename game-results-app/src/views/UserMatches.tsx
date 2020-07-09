@@ -4,24 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // // reactstrap components
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
-  CardText,
-  FormGroup,
-  Form,
-  Input,
   Row,
   Col,
   CardTitle
 } from "reactstrap";
-import { selectScreenName } from '../features/counterSlice';
-
-type UserMatchesProps = {
-    screenName: string
-}
 
 export function UserMatches(props: any) {
     const screenName = props.location.pathname.split("/")[2];
@@ -34,7 +23,7 @@ export function UserMatches(props: any) {
                   <CardTitle tag="h4">{screenName} Match Results</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <MatchTable />
+                  <MatchTable screenName={screenName}/>
                 </CardBody>
               </Card>
             </Col>

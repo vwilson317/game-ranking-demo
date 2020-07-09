@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action, compose, applyMiddleware } from '@reduxjs/toolkit';
-import counterReducer from '../features/counterSlice';
+import appReducer from '../features/appSlice';
 import thunk from 'redux-thunk';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer
+    app: appReducer
   },
 });
 
