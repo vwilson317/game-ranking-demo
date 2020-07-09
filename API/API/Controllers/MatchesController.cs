@@ -3,8 +3,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Hubs;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
@@ -31,11 +33,14 @@ namespace API.Controllers
 
         private readonly ILogger<MatchesController> _logger;
         private readonly IMatchBusinessLogic _matchBusinessLogic;
+        private readonly IHubContext<MatchHub> _hub;
 
-        public MatchesController(ILogger<MatchesController> logger, IMatchBusinessLogic matchBusinessLogic)
+        public MatchesController(ILogger<MatchesController> logger, IMatchBusinessLogic matchBusinessLogic,
+            IHubContext<MatchHub> hub)
         {
             _logger = logger;
             _matchBusinessLogic = matchBusinessLogic;
+            _hub = hub;
         }
 
         [HttpGet]
@@ -67,12 +72,13 @@ namespace API.Controllers
             try
             {
                 var match = _matchBusinessLogic.CreateMatch(matchDto);
-                return Created(new Uri($"api/matches/{match.MatchId}"), match);
+                _hub.Clients.All.SendAsync(MatchHub.MESSAGE);
+                return Created(new Uri($"http://localhost:5001/api/matches/{match.MatchId.Value}"), match);
             }
             catch (Exception e)
             {
                 _logger.LogError(e.Message);
-                return StatusCode(500);
+                return StatusCode(500, e);
             }
         }
     }
@@ -190,7 +196,7 @@ namespace API.Controllers
         public static Match Add(Match match)
         {
             match.MatchId = Guid.NewGuid();
-            match.CreatedAtUtc = DateTime.UtcNow; //todo: possibly remove this
+            match.CreatedAtUtc = DateTime.UtcNow;
             cd[match.MatchId.Value] = match;
 
             return match;

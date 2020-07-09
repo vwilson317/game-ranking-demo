@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Table } from 'reactstrap';
 import moment from 'moment';
+
+import { useSelector } from 'react-redux';
+import { getMatches } from '../features/counterSlice';
 
 export interface IMatch {
   matchId?: string,
@@ -9,41 +12,37 @@ export interface IMatch {
   standings: IPlayer[]
 }
 
-export interface IPlayer{
+export interface IPlayer {
   screenName: string
 }
 
-export default class MatchTable extends React.Component {
-  state = {
-    matches: [] as IMatch[]
-  }
+const MatchTable = () => {
+  //const [matches, setMatches] = useState<IMatch[]>();
 
-  componentDidMount() {
-    axios.get(`api/matches`)
-      .then(res => {
-        const matches = res.data;
-        this.setState({ matches });
-      })
-  }
+  const matches = useSelector(getMatches);
+  // useEffect(() => {
+  //   matches = getMatchesAsync();
+  // }, [matches]);
 
-  getFormattedDate(date: string){
+  const getFormattedDate = (date: string) => {
     return moment(date).startOf('hour').format("MMM Do YYYY") + " " + moment(date).fromNow();
   }
 
-  getMatchRows() {
-    return(this.state.matches.map(x => {
-      return (<tr>
-        <td>{this.getFormattedDate(x.createdAtUtc)}</td>
-        <td className="text-center">{x.standings[0].screenName}</td>
-        <td className="text-center">{x.standings[1].screenName}</td>
-        <td className="text-center">{x.standings[2].screenName}</td>
-      </tr>)
-    })
-    )
+  const getMatchRows = () => {
+    if (matches) {
+      return (matches.map(x => {
+        return (<tr>
+          <td>{getFormattedDate(x.createdAtUtc)}</td>
+          <td className="text-center">{x.standings[0].screenName}</td>
+          <td className="text-center">{x.standings[1].screenName}</td>
+          <td className="text-center">{x.standings[2].screenName}</td>
+        </tr>)
+      }))
+    }
   }
-  render() {
-    return (
-      <Table className="tablesorter" responsive>
+
+  return (
+    <Table className="tablesorter" responsive>
       <thead className="text-primary">
         <tr>
           <th>Date</th>
@@ -53,9 +52,10 @@ export default class MatchTable extends React.Component {
         </tr>
       </thead>
       <tbody>
-        {this.getMatchRows()}
+        {getMatchRows()}
       </tbody>
     </Table>
-    )
-  }
+  )
 }
+
+export default MatchTable;

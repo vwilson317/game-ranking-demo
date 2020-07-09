@@ -11,8 +11,8 @@ module.exports = function(app) {
   app.use(
     '/matchhub',
     createProxyMiddleware({
-      target: 'http://localhost:5000',
-      changeOrigin: true,
+      target: 'ws://localhost:5000',
+      ws: true
     })
   );
 };

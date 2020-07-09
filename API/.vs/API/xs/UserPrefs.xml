@@ -1,8 +1,15 @@
 ﻿<Properties StartupConfiguration="{C80D845C-6114-401A-8DDD-7508BACDECF0}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="API/Startup.cs">
     <Files>
-      <File FileName="API/Controllers/WeatherForecastController.cs" Line="69" Column="14" />
-      <File FileName="API/Startup.cs" Line="48" Column="16" />
+      <File FileName="API/Startup.cs" Line="56" Column="45" />
+      <File FileName="API/Dockerfile" />
+      <File FileName="docker-compose.yml" />
+      <File FileName=".dockerignore" />
+      <File FileName="API/Program.cs" />
+      <File FileName="API/API.csproj" />
+      <File FileName="API/Controllers/MatchesController.cs" />
+      <File FileName="API/Properties/launchSettings.json" />
+      <File FileName="API/Hubs/MatchHub.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,19 +17,26 @@
           <Node name="API" expanded="True">
             <Node name="API" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Properties" expanded="True" />
+              <Node name="Hubs" expanded="True" />
               <Node name="Startup.cs" selected="True" />
             </Node>
+            <Node name="docker-compose" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.API FirstBuild="True" PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Controllers/MatchesController.cs" relfile="API/Controllers/MatchesController.cs" line="66" column="1" />
+      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Controllers/MatchesController.cs" relfile="API/Controllers/MatchesController.cs" line="58" column="1" />
+      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Controllers/MatchesController.cs" relfile="API/Controllers/MatchesController.cs" line="80" column="1" />
+      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Hubs/MatchHub.cs" relfile="API/Hubs/MatchHub.cs" line="14" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

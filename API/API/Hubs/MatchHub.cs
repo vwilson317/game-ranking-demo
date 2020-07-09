@@ -6,12 +6,13 @@ namespace API.Hubs
 {
     public class MatchHub : Hub
     {
+        public const string MESSAGE = "NewResultsAvailable";
         public MatchHub()
         { }
 
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage()
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.All.SendAsync(MESSAGE);
         }
     }
 }

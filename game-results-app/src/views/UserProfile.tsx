@@ -35,16 +35,8 @@ import Axios from "axios";
 import { IMatch, IPlayer } from '../components/MatchTable';
 import moment from "moment";
 
-
-
 function UserProfile() {
   const [playerStandings, setPlayerStandings] = useState('')
-
-  function SaveMatchResults(e: any) {
-    debugger
-    if (e !== undefined) { e.preventDefault() };
-    Axios.post('matches', playerStandings)
-  }
 
   const handleChange = (event: any) => {
     setPlayerStandings(event.target.value);
@@ -61,11 +53,15 @@ function UserProfile() {
         const matchDto = {
           standings: players
         } as IMatch
-        debugger
-        console.log(matchDto)
-      Axios.post('api/matches', matchDto).then(() => {
-        alert('Saved Successfully');
-        setPlayerStandings('');
+      Axios.post('api/matches', matchDto)
+      .catch(() => {
+        alert('Error saving match');
+      })
+      .then((response: any) => {
+        if(response.status === 201){
+          alert('Saved Successfully');
+          setPlayerStandings('');
+        }
       })
     }
     event.preventDefault();
@@ -89,11 +85,12 @@ function UserProfile() {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Match results (in oder of finish)</label>
+                        <label>Match results (in order of finish)</label>
                         <Input
                           defaultValue=""
                           placeholder="i.e player7, player2, player100, player4, player8 ..."
                           type="text"
+                          value={playerStandings}
                           onChange={handleChange}
                         />
                       </FormGroup>

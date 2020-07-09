@@ -23,10 +23,6 @@ type UserMatchesProps = {
     screenName: string
 }
 
-// function getScreenName() {
-//     return 
-// }
-
 export function UserMatches() {
     const screenName = useSelector(selectScreenName);
     return (<>
