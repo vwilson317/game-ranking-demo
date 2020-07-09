@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{C80D845C-6114-401A-8DDD-7508BACDECF0}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="API/Startup.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API/DataAccess/Player.cs">
     <Files>
       <File FileName="API/Startup.cs" Line="56" Column="45" />
       <File FileName="API/Dockerfile" />
@@ -7,18 +7,31 @@
       <File FileName=".dockerignore" />
       <File FileName="API/Program.cs" />
       <File FileName="API/API.csproj" />
-      <File FileName="API/Controllers/MatchesController.cs" />
+      <File FileName="API/Controllers/MatchesController.cs" Line="20" Column="28" />
       <File FileName="API/Properties/launchSettings.json" />
-      <File FileName="API/Hubs/MatchHub.cs" />
+      <File FileName="API/Hubs/MatchHub.cs" Line="18" Column="5" />
+      <File FileName="API/Controllers/MatchBusinessLogic.cs" Line="6" Column="23" />
+      <File FileName="API/Controllers/Match.cs" Line="4" Column="25" />
+      <File FileName="API/Controllers/IMatchRepo.cs" Line="4" Column="25" />
+      <File FileName="API/Controllers/IMatchBusinessLogic.cs" Line="1" Column="1" />
+      <File FileName="API/Controllers/AppState.cs" Line="26" Column="19" />
+      <File FileName="API/AutoMapper/AppProfile.cs" Line="3" Column="16" />
+      <File FileName="API/Dtos/MatchDto.cs" Line="2" Column="34" />
+      <File FileName="API/DataAccess/MatchRepo.cs" Line="4" Column="25" />
+      <File FileName="API/DataAccess/Player.cs" Line="1" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="API" expanded="True">
             <Node name="API" expanded="True">
+              <Node name="AutoMapper" expanded="True" />
+              <Node name="BusinessLogic" expanded="True" />
               <Node name="Controllers" expanded="True" />
-              <Node name="Hubs" expanded="True" />
-              <Node name="Startup.cs" selected="True" />
+              <Node name="DataAccess" expanded="True">
+                <Node name="Player.cs" selected="True" />
+              </Node>
+              <Node name="Dtos" expanded="True" />
             </Node>
             <Node name="docker-compose" expanded="True" />
           </Node>
@@ -32,10 +45,7 @@
   <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Controllers/MatchesController.cs" relfile="API/Controllers/MatchesController.cs" line="66" column="1" />
-      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Controllers/MatchesController.cs" relfile="API/Controllers/MatchesController.cs" line="58" column="1" />
-      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Controllers/MatchesController.cs" relfile="API/Controllers/MatchesController.cs" line="80" column="1" />
-      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Hubs/MatchHub.cs" relfile="API/Hubs/MatchHub.cs" line="14" column="1" />
+      <Breakpoint file="/Users/vincent/game-ranking-demo/API/API/Controllers/MatchesController.cs" relfile="API/Controllers/MatchesController.cs" line="45" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

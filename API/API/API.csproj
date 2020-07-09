@@ -8,8 +8,12 @@
 
 
   <ItemGroup>
-    <Folder Include="IoC\" />
     <Folder Include="Hubs\" />
+    <Folder Include="BusinessLogic\" />
+    <Folder Include="DataAccess\" />
+    <Folder Include="Util\" />
+    <Folder Include="AutoMapper\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
